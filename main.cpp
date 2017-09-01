@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <string>
+#include <cmath>
 
 #include "Ship.h"
 #include "Base.h"
@@ -15,7 +16,6 @@ const int height = 480;
 const int nb_asteroids = 10;
 
 int main (int argc, char *argv[]){
-
 	Base::setFps(fps);
 	srand(time(0));
 
@@ -47,8 +47,8 @@ int main (int argc, char *argv[]){
 
 	//TEXT DRAWED ON THE WINDOW
 	sf::Font font;
-	if (!font.loadFromFile("NotoSansCJK-Light.ttc")){
-		std::cout << "Can't open font : NotoSansCJK-Light.ttc" << std::endl;
+	if (!font.loadFromFile("res/fonts/NotoSansCJK-Light.ttc")){
+		std::cout << "Can't open font : res/fonts/NotoSansCJK-Light.ttc" << std::endl;
 		return 1;
 	}
 	sf::Text textscore;
@@ -134,8 +134,8 @@ int main (int argc, char *argv[]){
 	}
 
 	sf::Font win_font;
-	if (!win_font.loadFromFile("Funhouse.ttf")){
-		std::cout << "Can't open font : Funhouse.ttf" << std::endl;
+	if (!win_font.loadFromFile("res/fonts/Funhouse.ttf")){
+		std::cout << "Can't open font : res/fonts/Funhouse.ttf" << std::endl;
 		return 1;
 	}
 	sf::Text textwin;

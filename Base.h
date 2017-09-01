@@ -2,6 +2,10 @@
 
 #define BASE_H
 
+#ifndef M_PI
+#define M_PI 3.14159265359 
+#endif
+
 #include <SFML/Graphics.hpp>
 
 struct Shoot2{

@@ -12,7 +12,7 @@ all: compile
 	rm Cible.o;
 
 compile: main.cpp Ship.cpp
-	g++ -c main.cpp -std=c++11 -lgcc_s -lgcc;
-	g++ -c Ship.cpp -std=c++11 -lgcc_s -lgcc;
-	g++ -c Base.cpp -std=c++11 -lgcc_s -lgcc;
-	g++ -c Cible.cpp -std=c++11 -lgcc_s -lgcc;
+	g++ -c main.cpp -std=c++11;
+	g++ -c Ship.cpp -std=c++11;
+	g++ -c Base.cpp -std=c++11;
+	g++ -c Cible.cpp -std=c++11;
