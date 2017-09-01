@@ -133,22 +133,34 @@ int main (int argc, char *argv[]){
 		fenetre.display();
 	}
 
+	sf::Font win_font;
+	if (!win_font.loadFromFile("Funhouse.ttf")){
+		std::cout << "Can't open font : Funhouse.ttf" << std::endl;
+		return 1;
+	}
 	sf::Text textwin;
-	textwin.setFont(font);
-	
+	textwin.setFont(win_font);
+	sf::Color color_win(255, 255, 255, 0);
 	textwin.setCharacterSize(30);
-	textwin.setFillColor(sf::Color::White);
+	textwin.setFillColor(color_win);
 	textwin.setString(std::string("You win !"));
 	textwin.setOrigin(textwin.getGlobalBounds().width/2, textwin.getGlobalBounds().height/2);
 	textwin.setPosition(width/2, height/2);
+
+	int t = 0;
 
 	while (fenetre.isOpen()){
 		while (fenetre.pollEvent(event)){
 			if (event.type == sf::Event::Closed)fenetre.close();
 		}
-
+		if (t<=60){
+			color_win.a = t*255/60;
+			textwin.setFillColor(color_win);
+			t++;
+		}
 		fenetre.clear();
 		fenetre.draw(textwin);
 		fenetre.display();
+		
 	}
 }

@@ -37,6 +37,10 @@ void Ship::draw(sf::RenderTarget &target){
 	vel.x = std::cos(rad)*speed;
 	vel.y = std::sin(rad)*speed;
 	shape.move(vel);
+	sf::Vector2f pos = shape.getPosition();
+	if (pos.x<0||pos.x>windowSize.x||pos.y<0||pos.y>windowSize.y){
+		shape.setPosition(windowSize.x-pos.x, windowSize.y-pos.y);
+	}
 	if (speed>0)speed-=0.2;
 	if (speed<0)speed = 0;
 }
