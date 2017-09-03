@@ -5,17 +5,22 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-#include "Base.h"
+#include "Movable.h"
 
-class Cible : public Base
+class Cible : public Movable
 {
 public:
 	Cible(const sf::Vector2f &pos = {0, 0}, const int &baseradius = 10);
-	void draw(sf::RenderTarget &target);
+	virtual void draw(sf::RenderTarget &target);
+	virtual std::string toString();
+
 	bool isMoving();
 	void restart(const sf::Vector2f &pos = {0, 0}, const int &baseradius = 10);
 	int getbaseradius();
 	bool touchShoot(const Shoot &shoot);
+
+protected:
+	virtual void update();
 
 private:
 	sf::ConvexShape *shape;

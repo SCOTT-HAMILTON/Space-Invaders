@@ -5,8 +5,9 @@
 #include <cmath>
 
 #include "Ship.h"
-#include "Base.h"
+#include "Entity.h"
 #include "Cible.h"
+#include "EntityManager.h"
 
 const int fps = 60;
 
@@ -16,13 +17,15 @@ const int height = 480;
 const int nb_asteroids = 10;
 
 int main (int argc, char *argv[]){
-	Base::setFps(fps);
+	Entity::setFps(fps);
 	srand(time(0));
 
 	sf::RenderWindow fenetre(sf::VideoMode(width, height), "Space Invaders");
-	Base::setWindowSize(fenetre.getSize());
+	Entity::setWindowSize(fenetre.getSize());
 	fenetre.setFramerateLimit(fps);
 	sf::Event event;
+
+	EntityManager manager;
 
 
 	//MY SHIP!
@@ -65,31 +68,18 @@ int main (int argc, char *argv[]){
 			if (event.type == sf::Event::Closed)fenetre.close();
 
 			else if (event.type == sf::Event::KeyPressed){
-				if (event.key.code == sf::Keyboard::Left)left = true;
-				else if (event.key.code == sf::Keyboard::Right)right = true;
-				else if (event.key.code == sf::Keyboard::Up)boost = true;
-				else if (event.key.code == sf::Keyboard::Space)shoot = true;
+				if (event.key.code == sf::Keyboard::Left)myship.goleft();
+				else if (event.key.code == sf::Keyboard::Right)myship.goright();
+				else if (event.key.code == sf::Keyboard::Up)myship.startboost();
+				else if (event.key.code == sf::Keyboard::Space)myship.startshoot();
 			}
 
 			else if (event.type == sf::Event::KeyReleased){
-				if (event.key.code == sf::Keyboard::Left)left = false;
-				else if (event.key.code == sf::Keyboard::Right)right = false;
-				else if (event.key.code == sf::Keyboard::Up)boost = false;
-				else if (event.key.code == sf::Keyboard::Space)shoot = false;
+				if (event.key.code == sf::Keyboard::Left)myship.noleft();
+				else if (event.key.code == sf::Keyboard::Right)myship.noright();
+				else if (event.key.code == sf::Keyboard::Up)myship.stopboost();
+				else if (event.key.code == sf::Keyboard::Space)myship.stopshoot();
 			}
-		}
-
-		if (left){
-			myship.turnLeft();
-		}
-		if (right){
-			myship.turnRight();
-		}
-		if (boost){
-			myship.boost();
-		}
-		if (shoot){
-			myship.shoot();
 		}
 
 		fenetre.clear();
@@ -97,7 +87,7 @@ int main (int argc, char *argv[]){
 		//DRAW TIME!
 		myship.draw(fenetre);
 		for (int i = asteroids.size()-1; i >= 0; i--){
-			asteroids[i].draw(fenetre);
+			asteroids[i].draw(fenetre);/*
 			bool continuer = true;
 			for (int j = 0; j < Ship::shoots.size(); j++){
 				if (asteroids[i].touchShoot(Ship::shoots[j])){
@@ -126,6 +116,7 @@ int main (int argc, char *argv[]){
 					asteroids[i].restart(pos);	
 				}
 			}
+			*/
 		}
 
 		fenetre.draw(textscore);

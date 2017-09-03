@@ -41,9 +41,11 @@ Cible::Cible(const sf::Vector2f &pos, const int &baseradius){
 }
 
 void Cible::draw(sf::RenderTarget &target){
+	target.draw((*(shape)));
+}
+
+void Cible::update(){
 	if (move){
-		target.draw((*(shape)));
-		
 		shape->move(vec);
 		
 		sf::Vector2f pos = shape->getPosition();
@@ -52,6 +54,10 @@ void Cible::draw(sf::RenderTarget &target){
 			move = false;
 		}
 	}
+}
+
+std::string Cible::toString(){
+	return "Cible";
 }
 
 bool Cible::isMoving(){

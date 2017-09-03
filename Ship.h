@@ -5,21 +5,30 @@
 #include <iostream>
 #include <vector>
 
-#include "Base.h"
+#include "Movable.h"
 
-class Ship : public Base
+class Ship : public Movable
 {
 public:
 	Ship(const sf::Vector2f &pos = {0, 0}, const int radius = 10, const int angle = 0, const sf::Color &color = sf::Color::White);
-	void draw(sf::RenderTarget &target);
+	virtual void draw(sf::RenderTarget &target);
+	virtual std::string toString();
 
 	//CONTROL FUNC
-	void turnRight();
-	void turnLeft();
-	void boost();
-	void shoot();
+	void goleft();
+	void noleft();
+	void goright();
+	void noright();
+
+	void startboost();
+	void stopboost();
+	void startshoot();
+	void stopshoot();
 
 	static std::vector<Shoot> shoots;
+
+protected:
+	virtual void update();
 
 private:
 	sf::CircleShape shape;
@@ -27,6 +36,8 @@ private:
 	static float maxSpeed;
 	static sf::Vector2f shootSize;
 	float speed;
+
+	bool left, right, boost, shoot;
 
 	
 };

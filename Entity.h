@@ -1,29 +1,22 @@
-#ifndef BASE_H
+#ifndef ENTITY_H
 
-#define BASE_H
+#define ENTITY_H
 
-#ifndef M_PI
-#define M_PI 3.14159265359 
-#endif
-
+#include <iostream>
 #include <SFML/Graphics.hpp>
+#include <string>
 
-struct Shoot2{
-	sf::RectangleShape shape;
-	sf::Vector2f vel;
-};
-
-typedef Shoot2 Shoot;
-
-
-class Base{
+class Entity{
 public:
+	virtual void draw(sf::RenderTarget &target);
+
 	static int fps; 
 	static sf::Vector2u windowSize;
 	static void setFps(const int fps);
 	static void setWindowSize(const sf::Vector2u &windowSize);
 
 	static float dist(const sf::Vector2f& p1, const sf::Vector2f p2);
+	virtual std::string toString(); 
 };
 
-#endif //BASE_H
+#endif //ENTITY_H
